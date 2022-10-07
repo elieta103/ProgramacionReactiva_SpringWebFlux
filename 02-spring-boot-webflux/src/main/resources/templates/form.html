@@ -10,9 +10,11 @@
 	<div>
 		<a th:href="@{/listar}">Volver</a>
 
-		<form th:action="@{/form}" method="post" th:object="${producto}">
+		<form th:action="@{/form}" method="post" th:object="${producto}" enctype="multipart/form-data">
 			<!-- Se pasa el id como hidden para la edicion. -->
 			<input th:if="${producto.id != null}" type="hidden" th:field="*{id}" />
+			<input th:if="${producto.foto != null}" type="hidden" th:field="*{foto}" />
+			
 			<div>
 				<label for="nombre">Nombre</label>
 				<div>
@@ -31,6 +33,22 @@
 				<label for="createAt">Fecha</label>
 				<div>
 					<input type="date" th:field="*{createAt}" />
+				</div>
+			</div>
+			<div>
+				<label for="categoria.id">Categoria</label>
+				<div>
+					<select th:field="*{categoria.id}">
+						<option value="">Seleccione Categoria</option>
+						<option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+					</select>
+				</div>
+				<small th:if="${#fields.hasErrors('categoria.id')}" th:errors="*{categoria.id}"></small>
+			</div>
+			<div>
+				<label for="file">Foto</label>
+				<div> <!--Se recupera en el controller con el nombre archivos -->
+					<input type="file" name="file" />
 				</div>
 			</div>
 			<div>

@@ -1,4 +1,4 @@
-package com.elhg.springboot.webflux.app.models.documents;
+package com.elhg.webflux.apirest.models.documents;
 
 import java.util.Date;
 
@@ -26,6 +26,7 @@ public class Producto {
 	private Date createAt;
 	
 	@Valid
+	@NotNull
 	private Categoria categoria;
 	
 	private String foto;
